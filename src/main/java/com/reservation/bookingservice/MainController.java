@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,6 +39,18 @@ public class MainController {
   } else {
    throw new BusResourceNotFoundException(String.format("Booking details with id %d not found", bookingId));
   }
+ }
+
+ @GetMapping("/booking/customers/{customer_id}")
+ public ResponseEntity<List<Booking>> getBookings(@PathVariable("customer_id") Integer customerId) {
+  List<Booking> bookings = bookingService.getBookings(customerId);
+  return ResponseEntity.status(HttpStatus.OK).body(bookings);
+ }
+
+ @DeleteMapping("/booking/{booking_id}")
+ public ResponseEntity cancelBooking(@PathVariable("booking_id") Integer bookingId){
+  bookingService.cancelBooking(bookingId);
+  return ResponseEntity.status(HttpStatus.OK).build();
  }
 
 }

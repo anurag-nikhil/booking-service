@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "passenger", schema = "bus_reservation_db")
+@Table(name = "passenger")
 public class Passenger {
     @JsonIgnore
     @Id
